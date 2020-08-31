@@ -1,0 +1,107 @@
+2020-06-13 04:21:08,242 [Worker-4] INFO  c.g.t.t.d.PublishedGradleVersions - Gradle version information cache is up-to-date. Trying to read.
+2020-06-21 00:08:45,017 [Worker-0] INFO  c.g.t.t.d.PublishedGradleVersions - Gradle version information cache is out-of-date. Trying to update.
+2020-06-22 04:08:23,420 [Worker-3] INFO  c.g.t.t.d.PublishedGradleVersions - Gradle version information cache is out-of-date. Trying to update.
+2020-06-22 04:14:03,739 [Worker-3] INFO  c.g.t.t.d.PublishedGradleVersions - Gradle version information cache is up-to-date. Trying to read.
+2020-06-23 07:06:32,503 [Worker-2] INFO  c.g.t.t.d.PublishedGradleVersions - Gradle version information cache is out-of-date. Trying to update.
+2020-06-23 07:40:39,073 [Worker-36] WARN  org.eclipse.jgit.util.FS_Win32 - null
+2020-06-23 07:40:40,394 [Worker-36] ERROR o.e.r.s.GitSnippetRepository - Transport operation failed.
+org.eclipse.jgit.api.errors.TransportException: http://git.eclipse.org/gitroot/recommenders/org.eclipse.recommenders.snipmatch.snippets.git: 301 Moved Permanently
+	at org.eclipse.jgit.api.FetchCommand.call(FetchCommand.java:245) ~[org.eclipse.jgit_4.8.0.201706111038-r.jar:4.8.0.201706111038-r]
+	at org.eclipse.recommenders.snipmatch.GitSnippetRepository.fetch(GitSnippetRepository.java:198) ~[org.eclipse.recommenders.snipmatch_2.4.10.v20170911-1410.jar:na]
+	at org.eclipse.recommenders.snipmatch.GitSnippetRepository.open(GitSnippetRepository.java:91) ~[org.eclipse.recommenders.snipmatch_2.4.10.v20170911-1410.jar:na]
+	at org.eclipse.recommenders.internal.snipmatch.rcp.EclipseGitSnippetRepository$2.run(EclipseGitSnippetRepository.java:165) [org.eclipse.recommenders.snipmatch.rcp_2.4.10.v20170911-1410.jar:na]
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:56) [org.eclipse.core.jobs_3.9.1.v20170714-0547.jar:na]
+Caused by: org.eclipse.jgit.errors.TransportException: http://git.eclipse.org/gitroot/recommenders/org.eclipse.recommenders.snipmatch.snippets.git: 301 Moved Permanently
+	at org.eclipse.jgit.transport.TransportHttp.connect(TransportHttp.java:545) ~[org.eclipse.jgit_4.8.0.201706111038-r.jar:4.8.0.201706111038-r]
+	at org.eclipse.jgit.transport.TransportHttp.openFetch(TransportHttp.java:326) ~[org.eclipse.jgit_4.8.0.201706111038-r.jar:4.8.0.201706111038-r]
+	at org.eclipse.jgit.transport.FetchProcess.executeImp(FetchProcess.java:136) ~[org.eclipse.jgit_4.8.0.201706111038-r.jar:4.8.0.201706111038-r]
+	at org.eclipse.jgit.transport.FetchProcess.execute(FetchProcess.java:122) ~[org.eclipse.jgit_4.8.0.201706111038-r.jar:4.8.0.201706111038-r]
+	at org.eclipse.jgit.transport.Transport.fetch(Transport.java:1236) ~[org.eclipse.jgit_4.8.0.201706111038-r.jar:4.8.0.201706111038-r]
+	at org.eclipse.jgit.api.FetchCommand.call(FetchCommand.java:234) ~[org.eclipse.jgit_4.8.0.201706111038-r.jar:4.8.0.201706111038-r]
+	... 4 common frames omitted
+2020-06-23 07:40:40,817 [Worker-39] WARN  o.e.r.models.ModelRepository - Failed to download org.eclipse.recommenders:index::zip:0.0.0
+org.eclipse.aether.resolution.ArtifactResolutionException: Could not find artifact org.eclipse.recommenders:index:zip:0.0.0-SNAPSHOT in models (http://download.eclipse.org/recommenders/models/oxygen/)
+	at org.eclipse.aether.internal.impl.DefaultArtifactResolver.resolve(DefaultArtifactResolver.java:453) ~[na:na]
+	at org.eclipse.aether.internal.impl.DefaultArtifactResolver.resolveArtifacts(DefaultArtifactResolver.java:255) ~[na:na]
+	at org.eclipse.aether.internal.impl.DefaultArtifactResolver.resolveArtifact(DefaultArtifactResolver.java:232) ~[na:na]
+	at org.eclipse.aether.internal.impl.DefaultRepositorySystem.resolveArtifact(DefaultRepositorySystem.java:303) ~[na:na]
+	at org.eclipse.recommenders.models.ModelRepository.resolveInternal(ModelRepository.java:193) [org.eclipse.recommenders.models_2.4.10.v20170911-1410.jar:na]
+	at org.eclipse.recommenders.models.ModelRepository.resolve(ModelRepository.java:172) [org.eclipse.recommenders.models_2.4.10.v20170911-1410.jar:na]
+	at org.eclipse.recommenders.internal.models.rcp.EclipseModelRepository.resolve(EclipseModelRepository.java:168) [org.eclipse.recommenders.models.rcp_2.4.10.v20170911-1410.jar:na]
+	at org.eclipse.recommenders.internal.models.rcp.DownloadModelArchiveJob.run(DownloadModelArchiveJob.java:76) [org.eclipse.recommenders.models.rcp_2.4.10.v20170911-1410.jar:na]
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:56) [org.eclipse.core.jobs_3.9.1.v20170714-0547.jar:na]
+Caused by: org.eclipse.aether.transfer.ArtifactNotFoundException: Could not find artifact org.eclipse.recommenders:index:zip:0.0.0-SNAPSHOT in models (http://download.eclipse.org/recommenders/models/oxygen/)
+	at org.eclipse.aether.connector.basic.ArtifactTransportListener.transferFailed(ArtifactTransportListener.java:48) ~[org.apache.maven.resolver.connector.basic_1.0.3.v20170405-0725.jar:1.0.3]
+	at org.eclipse.aether.connector.basic.BasicRepositoryConnector$TaskRunner.run(BasicRepositoryConnector.java:364) ~[org.apache.maven.resolver.connector.basic_1.0.3.v20170405-0725.jar:1.0.3]
+	at org.eclipse.aether.util.concurrency.RunnableErrorForwarder$1.run(RunnableErrorForwarder.java:76) ~[na:na]
+	at org.eclipse.aether.connector.basic.BasicRepositoryConnector$DirectExecutor.execute(BasicRepositoryConnector.java:590) ~[org.apache.maven.resolver.connector.basic_1.0.3.v20170405-0725.jar:1.0.3]
+	at org.eclipse.aether.connector.basic.BasicRepositoryConnector.get(BasicRepositoryConnector.java:258) ~[org.apache.maven.resolver.connector.basic_1.0.3.v20170405-0725.jar:1.0.3]
+	at org.eclipse.aether.internal.impl.DefaultArtifactResolver.performDownloads(DefaultArtifactResolver.java:529) ~[na:na]
+	at org.eclipse.aether.internal.impl.DefaultArtifactResolver.resolve(DefaultArtifactResolver.java:430) ~[na:na]
+	... 8 common frames omitted
+2020-06-25 04:30:02,726 [Worker-1] INFO  c.g.t.t.d.PublishedGradleVersions - Gradle version information cache is out-of-date. Trying to update.
+2020-06-26 05:29:33,506 [Worker-2] INFO  c.g.t.t.d.PublishedGradleVersions - Gradle version information cache is out-of-date. Trying to update.
+2020-06-30 08:45:05,655 [Worker-2] INFO  c.g.t.t.d.PublishedGradleVersions - Gradle version information cache is out-of-date. Trying to update.
+2020-07-02 11:42:57,144 [Worker-1] INFO  c.g.t.t.d.PublishedGradleVersions - Gradle version information cache is out-of-date. Trying to update.
+2020-07-02 14:18:30,680 [Worker-2] INFO  c.g.t.t.d.PublishedGradleVersions - Gradle version information cache is up-to-date. Trying to read.
+2020-07-06 11:18:20,904 [Worker-1] INFO  c.g.t.t.d.PublishedGradleVersions - Gradle version information cache is out-of-date. Trying to update.
+2020-07-07 10:59:27,183 [Worker-3] INFO  c.g.t.t.d.PublishedGradleVersions - Gradle version information cache is up-to-date. Trying to read.
+2020-07-07 17:16:17,994 [Worker-4] INFO  c.g.t.t.d.PublishedGradleVersions - Gradle version information cache is out-of-date. Trying to update.
+2020-07-07 18:15:05,683 [Worker-3] INFO  c.g.t.t.d.PublishedGradleVersions - Gradle version information cache is up-to-date. Trying to read.
+2020-07-08 14:27:25,789 [Worker-0] INFO  c.g.t.t.d.PublishedGradleVersions - Gradle version information cache is up-to-date. Trying to read.
+2020-07-08 18:05:53,250 [Worker-0] INFO  c.g.t.t.d.PublishedGradleVersions - Gradle version information cache is out-of-date. Trying to update.
+2020-07-09 11:06:33,195 [Worker-2] INFO  c.g.t.t.d.PublishedGradleVersions - Gradle version information cache is up-to-date. Trying to read.
+2020-07-09 17:19:20,771 [Worker-1] INFO  c.g.t.t.d.PublishedGradleVersions - Gradle version information cache is up-to-date. Trying to read.
+2020-07-10 10:44:58,134 [Worker-1] INFO  c.g.t.t.d.PublishedGradleVersions - Gradle version information cache is out-of-date. Trying to update.
+2020-07-10 11:57:06,726 [Worker-1] INFO  c.g.t.t.d.PublishedGradleVersions - Gradle version information cache is up-to-date. Trying to read.
+2020-07-13 11:34:38,416 [Worker-2] INFO  c.g.t.t.d.PublishedGradleVersions - Gradle version information cache is out-of-date. Trying to update.
+2020-07-13 14:54:15,642 [Worker-0] INFO  c.g.t.t.d.PublishedGradleVersions - Gradle version information cache is up-to-date. Trying to read.
+2020-07-16 13:56:37,827 [Worker-6] INFO  c.g.t.t.d.PublishedGradleVersions - Gradle version information cache is out-of-date. Trying to update.
+2020-07-17 10:58:42,072 [Worker-5] INFO  c.g.t.t.d.PublishedGradleVersions - Gradle version information cache is up-to-date. Trying to read.
+2020-07-17 12:08:54,201 [Worker-72] WARN  org.eclipse.jgit.util.FS_Win32 - null
+2020-07-17 12:08:54,465 [Worker-74] WARN  o.e.r.models.ModelRepository - Failed to download org.eclipse.recommenders:index::zip:0.0.0
+org.eclipse.aether.resolution.ArtifactResolutionException: Could not find artifact org.eclipse.recommenders:index:zip:0.0.0-SNAPSHOT in models (http://download.eclipse.org/recommenders/models/oxygen/)
+	at org.eclipse.aether.internal.impl.DefaultArtifactResolver.resolve(DefaultArtifactResolver.java:453) ~[na:na]
+	at org.eclipse.aether.internal.impl.DefaultArtifactResolver.resolveArtifacts(DefaultArtifactResolver.java:255) ~[na:na]
+	at org.eclipse.aether.internal.impl.DefaultArtifactResolver.resolveArtifact(DefaultArtifactResolver.java:232) ~[na:na]
+	at org.eclipse.aether.internal.impl.DefaultRepositorySystem.resolveArtifact(DefaultRepositorySystem.java:303) ~[na:na]
+	at org.eclipse.recommenders.models.ModelRepository.resolveInternal(ModelRepository.java:193) [org.eclipse.recommenders.models_2.4.10.v20170911-1410.jar:na]
+	at org.eclipse.recommenders.models.ModelRepository.resolve(ModelRepository.java:172) [org.eclipse.recommenders.models_2.4.10.v20170911-1410.jar:na]
+	at org.eclipse.recommenders.internal.models.rcp.EclipseModelRepository.resolve(EclipseModelRepository.java:168) [org.eclipse.recommenders.models.rcp_2.4.10.v20170911-1410.jar:na]
+	at org.eclipse.recommenders.internal.models.rcp.DownloadModelArchiveJob.run(DownloadModelArchiveJob.java:76) [org.eclipse.recommenders.models.rcp_2.4.10.v20170911-1410.jar:na]
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:56) [org.eclipse.core.jobs_3.9.1.v20170714-0547.jar:na]
+Caused by: org.eclipse.aether.transfer.ArtifactNotFoundException: Could not find artifact org.eclipse.recommenders:index:zip:0.0.0-SNAPSHOT in models (http://download.eclipse.org/recommenders/models/oxygen/)
+	at org.eclipse.aether.connector.basic.ArtifactTransportListener.transferFailed(ArtifactTransportListener.java:48) ~[org.apache.maven.resolver.connector.basic_1.0.3.v20170405-0725.jar:1.0.3]
+	at org.eclipse.aether.connector.basic.BasicRepositoryConnector$TaskRunner.run(BasicRepositoryConnector.java:364) ~[org.apache.maven.resolver.connector.basic_1.0.3.v20170405-0725.jar:1.0.3]
+	at org.eclipse.aether.util.concurrency.RunnableErrorForwarder$1.run(RunnableErrorForwarder.java:76) ~[na:na]
+	at org.eclipse.aether.connector.basic.BasicRepositoryConnector$DirectExecutor.execute(BasicRepositoryConnector.java:590) ~[org.apache.maven.resolver.connector.basic_1.0.3.v20170405-0725.jar:1.0.3]
+	at org.eclipse.aether.connector.basic.BasicRepositoryConnector.get(BasicRepositoryConnector.java:258) ~[org.apache.maven.resolver.connector.basic_1.0.3.v20170405-0725.jar:1.0.3]
+	at org.eclipse.aether.internal.impl.DefaultArtifactResolver.performDownloads(DefaultArtifactResolver.java:529) ~[na:na]
+	at org.eclipse.aether.internal.impl.DefaultArtifactResolver.resolve(DefaultArtifactResolver.java:430) ~[na:na]
+	... 8 common frames omitted
+2020-07-17 12:08:54,862 [Worker-72] ERROR o.e.r.s.GitSnippetRepository - Transport operation failed.
+org.eclipse.jgit.api.errors.TransportException: http://git.eclipse.org/gitroot/recommenders/org.eclipse.recommenders.snipmatch.snippets.git: 301 Moved Permanently
+	at org.eclipse.jgit.api.FetchCommand.call(FetchCommand.java:245) ~[org.eclipse.jgit_4.8.0.201706111038-r.jar:4.8.0.201706111038-r]
+	at org.eclipse.recommenders.snipmatch.GitSnippetRepository.fetch(GitSnippetRepository.java:198) ~[org.eclipse.recommenders.snipmatch_2.4.10.v20170911-1410.jar:na]
+	at org.eclipse.recommenders.snipmatch.GitSnippetRepository.open(GitSnippetRepository.java:91) ~[org.eclipse.recommenders.snipmatch_2.4.10.v20170911-1410.jar:na]
+	at org.eclipse.recommenders.internal.snipmatch.rcp.EclipseGitSnippetRepository$2.run(EclipseGitSnippetRepository.java:165) [org.eclipse.recommenders.snipmatch.rcp_2.4.10.v20170911-1410.jar:na]
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:56) [org.eclipse.core.jobs_3.9.1.v20170714-0547.jar:na]
+Caused by: org.eclipse.jgit.errors.TransportException: http://git.eclipse.org/gitroot/recommenders/org.eclipse.recommenders.snipmatch.snippets.git: 301 Moved Permanently
+	at org.eclipse.jgit.transport.TransportHttp.connect(TransportHttp.java:545) ~[org.eclipse.jgit_4.8.0.201706111038-r.jar:4.8.0.201706111038-r]
+	at org.eclipse.jgit.transport.TransportHttp.openFetch(TransportHttp.java:326) ~[org.eclipse.jgit_4.8.0.201706111038-r.jar:4.8.0.201706111038-r]
+	at org.eclipse.jgit.transport.FetchProcess.executeImp(FetchProcess.java:136) ~[org.eclipse.jgit_4.8.0.201706111038-r.jar:4.8.0.201706111038-r]
+	at org.eclipse.jgit.transport.FetchProcess.execute(FetchProcess.java:122) ~[org.eclipse.jgit_4.8.0.201706111038-r.jar:4.8.0.201706111038-r]
+	at org.eclipse.jgit.transport.Transport.fetch(Transport.java:1236) ~[org.eclipse.jgit_4.8.0.201706111038-r.jar:4.8.0.201706111038-r]
+	at org.eclipse.jgit.api.FetchCommand.call(FetchCommand.java:234) ~[org.eclipse.jgit_4.8.0.201706111038-r.jar:4.8.0.201706111038-r]
+	... 4 common frames omitted
+2020-07-17 15:18:54,123 [Worker-3] INFO  c.g.t.t.d.PublishedGradleVersions - Gradle version information cache is out-of-date. Trying to update.
+2020-07-20 12:30:39,358 [Worker-3] INFO  c.g.t.t.d.PublishedGradleVersions - Gradle version information cache is out-of-date. Trying to update.
+2020-07-20 14:45:44,749 [Worker-1] INFO  c.g.t.t.d.PublishedGradleVersions - Gradle version information cache is up-to-date. Trying to read.
+2020-07-20 17:51:55,877 [Worker-5] INFO  c.g.t.t.d.PublishedGradleVersions - Gradle version information cache is up-to-date. Trying to read.
+2020-07-20 19:51:55,236 [Worker-0] INFO  c.g.t.t.d.PublishedGradleVersions - Gradle version information cache is up-to-date. Trying to read.
+2020-07-20 21:11:52,087 [Worker-2] INFO  c.g.t.t.d.PublishedGradleVersions - Gradle version information cache is up-to-date. Trying to read.
+2020-07-21 10:04:16,628 [Worker-1] INFO  c.g.t.t.d.PublishedGradleVersions - Gradle version information cache is up-to-date. Trying to read.
+2020-07-22 10:18:26,050 [Worker-4] INFO  c.g.t.t.d.PublishedGradleVersions - Gradle version information cache is out-of-date. Trying to update.
+2020-07-22 12:07:38,039 [Worker-0] INFO  c.g.t.t.d.PublishedGradleVersions - Gradle version information cache is up-to-date. Trying to read.
+2020-07-23 15:48:37,846 [Worker-5] INFO  c.g.t.t.d.PublishedGradleVersions - Gradle version information cache is out-of-date. Trying to update.
+2020-07-24 18:03:34,914 [Worker-3] INFO  c.g.t.t.d.PublishedGradleVersions - Gradle version information cache is out-of-date. Trying to update.

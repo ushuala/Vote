@@ -1,0 +1,27 @@
+<html>
+<head>
+<?php
+include($_SERVER['DOCUMENT_ROOT'].'/ApplicationVote/Dev/settings/include.php');
+?>
+</head>
+<body>
+
+
+
+
+
+<div class="container"> 
+<div class ="row">
+<h3 class ="center">Certificat de sécurité</h3>
+</div>
+</div>
+
+
+
+
+
+
+
+<?php include($_SERVER['DOCUMENT_ROOT'].'/ApplicationVote/Dev/settings/footer.php'); ?>
+</body>
+</html>

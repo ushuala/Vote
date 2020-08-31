@@ -1,0 +1,211 @@
+function connexionUser(){
+
+	
+	var pseudo = document.getElementById("pseudo").value;
+	if(pseudo != ""){
+		$('.connexionUser').addClass("disabled");
+		
+		$.ajax({
+	        url : '../controller/connexionUser.php', // La ressource ciblée
+	        type: 'POST',
+	        data : 'pseudo=' + pseudo,
+	        dataType : 'html',
+	        success : function(data){ // code_html contient le HTML renvoyé
+	    		//Le cookie expirera dans 2h
+	    		var now = new Date();
+	    		var time = now.getTime();
+	    		time += 3600 * 2000;
+	    		now.setTime(time);
+	    		document.cookie = "username=" + pseudo + "; expires= " + now.toUTCString() + ";";
+	    		document.cookie = "userID=" + data + "; expires= " + now.toUTCString() + ";";
+	    		window.location.href = "vote.php";
+	        },
+	        error : function(resultat, statut, erreur){
+	        	console.log("error");
+	        }
+	     });
+
+	}
+}
+
+function moveAccueil(){
+	
+}
+
+function getCookie(cname) {
+	  var name = cname + "=";
+	  var decodedCookie = decodeURIComponent(document.cookie);
+	  var ca = decodedCookie.split(';');
+	  for(var i = 0; i <ca.length; i++) {
+	    var c = ca[i];
+	    while (c.charAt(0) == ' ') {
+	      c = c.substring(1);
+	    }
+	    if (c.indexOf(name) == 0) {
+	      return c.substring(name.length, c.length);
+	    }
+	  }
+	  return "";
+	}
+
+function voter(){
+	var selected = document.querySelector('input[name="vote"]:checked');
+	if(selected != null){
+
+		$('.votebutton').addClass("disabled");
+		var choix = selected.value;
+		var userId= getCookie("userID");
+		var now = new Date();
+		var time = now.getTime();
+		time += 3600 * 2000;
+		now.setTime(time);
+		document.cookie = "idChoix=" + choix +"; expires= " + now.toUTCString() + ";";
+		$.ajax({
+	        url : '../controller/voter.php', // La ressource ciblée
+	        type: 'POST',
+	        data : 'userId=' + userId + '&option=' + choix,
+	        dataType : 'html',
+	        success : function(data){ // code_html contient le HTML renvoyé
+	            if(data == "success"){
+	            	
+	            	window.location.href = "resultats.php";
+	            }
+	        },
+	        error : function(resultat, statut, erreur){
+	        	console.log("error");
+	        }
+	     });
+		
+	}
+
+}
+
+function loadStats(){
+	
+	var sondageId= getCookie("sondage");
+	var dataReceived;
+	var sondageFini=0;
+	//Est-ce que ce sondage est fini ?
+	$.ajax({
+        url : '../controller/sondageFini.php', // La ressource ciblée
+        type: 'POST',
+        data : 'sondageId=' + sondageId,
+        dataType : 'html',
+        success : function(data){ // code_html contient le HTML renvoyé
+        	sondageFini=data;
+        }
+	});
+	
+	
+	$.ajax({
+        url : '../controller/statistiques.php', // La ressource ciblée
+        type: 'POST',
+        data : 'sondageId=' + sondageId,
+        dataType : 'html',
+        success : function(data){ // code_html contient le HTML renvoyé
+        	dataReceived = JSON.parse(data);
+        	makeGraph(dataReceived);
+        }
+	});
+
+}
+
+var myPieChart;
+
+function makeGraph(dataReceived){
+	console.log("called");
+	//console.log(dataReceived);
+	if($('#nbVotant') != null){
+		var nbVotant = 0;
+		for(var i = 0; i < dataReceived.length; i++){
+			nbVotant += parseInt(dataReceived[i][2]);
+		}
+		$('#nbVotant').text("Nombre de votes : "+nbVotant);
+	}
+	var dataClean = []; 
+	var labelClean = [];
+	var colors = ['#000080','#008080','#800080','#008000','#808000','#800000','#808080','#C0C0C0','#0000FF','#00FF00','#FF00FF','#7B68EE'];
+	var backgroundColor = [];
+	var i = 0;
+	while(i<dataReceived.length){
+		dataClean[i] = dataReceived[i][2];
+		labelClean[i] = dataReceived[i][1];
+		if(colors[i] != null){
+			backgroundColor[i]=colors[i];
+		}
+		else{
+			backgroundColor[i]='#FF0000';
+		}
+		i=i+1;
+	}
+	data = {
+		    datasets: [{
+		        data: dataClean,
+
+		    backgroundColor: backgroundColor
+		    }],
+
+		    labels: labelClean
+		};
+	options = {    responsive: true,
+		    maintainAspectRatio: false};
+	var ctx = document.getElementById('myChart');
+
+	if(myPieChart == undefined){
+
+		myPieChart = new Chart(ctx, {
+		    type: 'pie',
+		    data: data,
+		    options: options
+		});
+		
+	}
+	else{
+		myPieChart.data=data;
+		  myPieChart.update();
+	}
+	/**/
+	if($('#nomSondage') != null){
+		$('#nomSondage').text(dataReceived[0][3]);
+	}
+	if($('#votants') != null){
+		$('#votants').text("Vote des participants :");
+		var sondageId= getCookie("sondage");
+		$.ajax({
+	        url : '../controller/voteUtilisateur.php', // La ressource ciblée
+	        type: 'POST',
+	        data : 'sondageId=' + sondageId,
+	        dataType : 'html',
+	        success : function(data){ 
+	        	dataReceived = JSON.parse(data);
+	        	dataReceived.forEach(function(data){
+	        			$('#votants').append("<br>");
+	        			$('#votants').append(data['pseudo'] + ' : ' + data['description']);
+	        			//console.log();
+	        	});
+	        	//console.log(dataReceived);
+	        }
+		});
+	}
+}
+
+function monVote(){
+	
+	var idChoix= getCookie("idChoix");
+	var dataReceived;
+	console.log(idChoix);
+	$.ajax({
+        url : '../controller/monVote.php', // La ressource ciblée
+        type: 'POST',
+        data : 'idChoix=' + idChoix,
+        dataType : 'html',
+        success : function(data){ // code_html contient le HTML renvoyé
+        	if($('#monVote') != null){
+        		$('#monVote').text("Mon vote : " + data);
+        	}
+        }
+	});
+
+}
+
+

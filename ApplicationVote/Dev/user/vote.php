@@ -1,0 +1,97 @@
+<html>
+<head>
+
+<?php include('../settings/include.php'); ?>
+</head>
+<body>
+<?php 
+/*Already connected ?*/
+if(!isset($_COOKIE['username'])){
+	echo "<script>window.location.href = 'connexion.php'; </script>";
+}
+?>
+<?php
+
+include '../settings/database.php';
+
+try{
+	$dbh = new PDO('mysql:host=localhost;port=3308;dbname=vote', $user, $pass);
+	
+	
+	//Récupération du sondage en cours
+	$query = 'SELECT * FROM `sondage` WHERE date_fin IS NULL';
+	$sondage = $dbh->query($query);
+	$sondage = $sondage->fetch(PDO::FETCH_ASSOC);
+	
+	if(is_array($sondage)){
+	//Récupération des options qui lui sont liées
+	$query ='SELECT * from `choix` WHERE sondageId ='.$sondage["sondageId"].' ORDER BY choixId ASC';
+	$options = array();
+	foreach($dbh->query($query) as $row){
+		array_push($options,$row);
+		//echo $row["description"];
+	}
+	}
+
+} catch (PDOException $e) {
+	print "Error!: " . $e->getMessage() . "<br/>";
+	die();
+}
+
+?>
+
+<div class="container">
+
+<div class="row">
+<?php 
+if(is_array($sondage)){
+?>
+    <form class="col s12" action="#">
+    <h3 class="center"><?php echo $sondage["libelle"] ?></h3>
+    <br>
+    <?php 
+     $i = 0;
+     $nbOptions = count($options);
+     while ($i < $nbOptions){
+     	echo ' <p>
+      <label>
+        <input name="vote" type="radio" value = "'. $options[$i]["choixId"].'"/>
+        <span>'. $options[$i]["description"].'</span>
+      </label>
+
+    </p>';
+     	$i++;
+     }
+    ?>
+   
+    <a class="waves-effect waves-light btn votebutton" onclick="voter()">Voter</a>
+
+
+ </form>
+ 
+ <?php 
+}
+else {
+?>
+
+<h3 class = "center">Aucun sondage en cours...</h3>
+<div class="center"><a class="waves-effect waves-light btn center" href="">Réessayer</a> </div>
+
+ <?php 
+}
+?>
+</div>
+</div>
+
+<script>
+//Le cookie expirera dans 2h
+var now = new Date();
+var time = now.getTime();
+time += 3600 * 2000;
+now.setTime(time);
+document.cookie = "sondage=" + <?php echo $sondage["sondageId"] ?> + "; expires= " + now.toUTCString() + ";";
+</script>
+<?php include('../settings/footer.php'); ?>
+</body>
+</html>
+

@@ -1,0 +1,37 @@
+
+<html>
+<head>
+<?php
+include($_SERVER['DOCUMENT_ROOT'].'/ApplicationVote/Dev/settings/include.php');
+?>
+</head>
+<body>
+
+
+
+
+
+<div class="container"> 
+<div class ="row">
+
+<h3 class ="center">Application de vote</h3>
+
+<br>
+<br>
+<div class="center"><a class="waves-effect waves-light btn-large round" href="//localhost/ApplicationVote/Dev/admin/connexion.php">Accueil administrateur</a> </div><br>
+<div class="center"><a class="waves-effect waves-light btn-large round" href="//localhost/ApplicationVote/Dev/user/connexion">Accueil utilisateur</a> </div><br>
+
+ 
+
+</div>
+ <div class ="bottom"> <div > Première connexion ? </div><a class="waves-effect waves-light btn-small round">Télécharger le certificat de sécurité</a></div><br>
+</div>
+
+
+
+
+
+
+<?php include($_SERVER['DOCUMENT_ROOT'].'/ApplicationVote/Dev/settings/footer.php'); ?>
+</body>
+</html>

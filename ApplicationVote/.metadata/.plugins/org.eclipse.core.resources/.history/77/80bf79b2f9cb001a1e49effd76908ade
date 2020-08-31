@@ -1,0 +1,101 @@
+
+<?php 
+session_start();
+/*Already connected ?*/
+if(!isset($_SESSION['pseudo'])){
+	echo "<script>window.location.href = '../accueil.php'; </script>";
+}
+?>
+<html>
+<head>
+
+<?php include('../settings/include.php'); ?>
+</head>
+<body>
+<?php 
+//On test si y'a pas déjà un sondage de crée
+include '../settings/database.php';
+
+try{
+	$dbh = new PDO('mysql:host=localhost;port=3308;dbname=vote', $user, $pass);
+	
+	
+	//Récupération du sondage en cours
+	$query = 'SELECT * FROM `sondage` WHERE date_fin IS NULL';
+	$sondage = $dbh->query($query);
+	$sondage = $sondage->fetch(PDO::FETCH_ASSOC);
+	$found = is_array($sondage);
+
+} catch (PDOException $e) {
+	print "Error!: " . $e->getMessage() . "<br/>";
+	die();
+}
+
+?>
+
+<div class="container"> 
+<a class="waves-effect waves-light btn  index" onclick="retourIndex()">Index</a>
+<a class="waves-effect waves-light btn red disconnect" onclick="disconnectAdmin()">Deconnexion</a>
+<div class ="row">
+
+<?php 
+if($found == 1){
+
+?>
+<h3 class ="center"> Sondage déjà en cours... </h3>
+<div class ="center"> Pour créer un nouveau sondage, il vous faudra terminer le sondage en cours. <a href="modificationSondage.php"> Voir le sondage en cours.</a></div>
+
+<?php 
+}
+else {
+?>
+<h3 class ="center">Création d'un sondage</h3>
+
+<form class="col s12"  id="optionForm">
+      <div class="row">
+        <div class="input-field col s12">
+          <textarea id="nom" class="materialize-textarea"></textarea>
+          <label for="nom">Intitulé de la question</label>
+        </div>
+        </div>
+        <div class="row">
+        <div class="input-field col s6">
+          <input placeholder="Option" type="text" class="validate option">            
+          </div>        
+          <div class="input-field col s1">       
+        <i class="fas fa-minus-circle fa-3x removeOption" style="color: #F44336; cursor : pointer;"></i>
+        </div>
+        </div>
+        
+        
+        <div class="row">
+                <div class="input-field col s6">
+          <input placeholder="Option" type="text" class="validate option">
+          </div>
+                                 <div class="input-field col s1">       
+        <i class="fas fa-minus-circle fa-3x removeOption" style="color: #F44336; cursor : pointer;"></i>
+        </div>
+        </div>
+
+    </form>
+        <i class="fas fa-plus-circle fa-3x" style="color: #26a69a; cursor : pointer;" onclick="addOption()"></i>
+                        <div class="input-field col s12">
+
+        <a class="waves-effect waves-light btn right creerSondage" onclick="createSondage()">Créer</a>
+        </div>
+</div></div>
+<?php 
+}?>
+
+<?php include('../settings/footer.php'); ?>
+<script> window.nbOption = 2;
+
+
+$(document).on("click", ".removeOption" , function() {
+    $(this).parent().parent().remove();
+});
+
+</script>
+</body>
+</html>
+

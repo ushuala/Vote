@@ -1,0 +1,65 @@
+function connectAdmin()  {
+		
+	$pseudo = $('#pseudo').val();
+	$password = $('#password').val();
+	
+	if($pseudo == '' || $password == ''){
+		M.toast({
+			html: 'Identifiant ou mot de passe manquant.'
+			
+		});
+	}
+	
+	else{
+	    $.ajax({
+	        url : '../controller/connexionAdmin.php', // La ressource ciblée
+	        type: 'POST',
+	        data : 'pseudo=' + $pseudo + '&password=' + $password,
+	        dataType : 'html',
+	        success : function(data){ // code_html contient le HTML renvoyé
+	            if(data == "connected"){
+	            	window.location.href = "index.php";
+	            }
+	            else {
+	        		M.toast({
+	        			html: 'Identifiant ou mot de passe erroné.',
+	        			classes : 'red'
+	        			
+	        		});
+	            }
+	        },
+	        error : function(resultat, statut, erreur){
+	        	console.log("error");
+	        },
+	        complete : function(resultat, statut){
+	        	console.log("complete");
+	        }
+	     });
+	}
+}
+
+function disconnectAdmin(){
+	 $.ajax({
+	        url : '../controller/deconnexionAdmin.php', // La ressource ciblée
+	        type: 'POST',
+	        dataType : 'html',
+	        success : function(data){ // code_html contient le HTML renvoyé
+	           location.reload();
+	        }
+	     });
+	
+}
+
+function moveCreateSondage(){
+	window.location.href = "creationSondage.php";
+}
+
+function moveModifySondage(){
+	window.location.href = "modificationSondage.php";
+}
+
+function moveHistoricSondage(){
+	window.location.href = "historiqueSondage.php";
+}
+
+function 

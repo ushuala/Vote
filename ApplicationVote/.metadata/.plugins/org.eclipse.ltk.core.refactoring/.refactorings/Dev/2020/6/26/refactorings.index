@@ -1,0 +1,5 @@
+1592792700127	Rename resource 'js.js'
+1592794274127	Rename resource 'admin.js'
+1592794337788	Rename resource 'connexionAdmin.js'
+1592889381503	Move 'database' to 'controller'
+1592889461811	Move 'passwords' to 'settings'

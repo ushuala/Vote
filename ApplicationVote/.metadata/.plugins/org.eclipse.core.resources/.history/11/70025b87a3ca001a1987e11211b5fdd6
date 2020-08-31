@@ -1,0 +1,29 @@
+<html>
+<head>
+<?php
+include($_SERVER['SERVER_ADDR'].'/ApplicationVote/Dev/settings/include.php');
+?>
+</head>
+<body>
+
+
+
+
+
+<div class="container"> 
+<div class ="row">
+<h3 class ="center">Certificat de sécurité</h3>
+<div class="center"><a class="waves-effect waves-light btn-large round" >Telechargement</a> </div><br>
+
+</div>
+</div>
+
+
+
+
+
+
+
+<?php include($_SERVER['DOCUMENT_ROOT'].'/ApplicationVote/Dev/settings/footer.php'); ?>
+</body>
+</html>

@@ -1,0 +1,73 @@
+body{
+	background-color : rgb(232,232,232);
+
+}
+
+.page-footer{
+	padding-top : 0;
+	left : 0;
+	bottom : 0;
+	width : 100%;
+	background-color: rgb(32,32,32);
+	position : fixed;
+	z-index : 999;
+}
+
+.container{
+    min-height: 90%;
+    padding-bottom : 10%;
+    position : relative;
+	}
+
+  main {
+    flex: 1 0 auto;
+  }
+
+span{
+	display : inline !important;
+}
+
+.round{
+	border-radius : 8px;
+}
+
+.disconnect{
+	left: 90%;
+	position : absolute;
+}
+
+.index{
+	right: 80%;
+	position : absolute;
+}
+
+.centervertical{
+overflow : auto;
+padding-bottom : 0%;
+}
+
+.modal {
+	width : 25%;
+	}
+	
+.pointer{
+	cursor : pointer;
+}
+
+select{
+	display:block;
+}
+
+.bottom {
+	position : absolute !important;
+	bottom : 0;
+right : 0%;
+left : 0%;
+    padding-bottom : 10%;
+
+}
+
+.chart-container{
+    margin: 0 auto;
+    }
+
